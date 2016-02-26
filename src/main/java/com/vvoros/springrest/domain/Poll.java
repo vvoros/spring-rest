@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Poll {
@@ -20,11 +23,13 @@ public class Poll {
 	private Long id;
 	
 	@Column(name = "Poll_Question")
+	@NotEmpty
 	private String question;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Poll_Id")
 	@OrderBy
+	@Size(min = 2, max = 6)
 	private Set<Option> options;
 
 	public Long getId() {
